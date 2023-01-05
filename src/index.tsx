@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import i18n from 'i18next';
-import App from './App';
 import { initReactI18next } from 'react-i18next';
+import App from './App';
 
 import './index.css';
 
@@ -28,10 +28,10 @@ i18n
   });
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
