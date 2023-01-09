@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Husky problem 
+
+If error occurs with your husky first time configuration (executable path), please check if ./husky/pre-commit have correct permissions: 
+
+### `chmod ug+x .husky/*`
+
 ## Available Scripts
 
 In the project directory, you can run:
