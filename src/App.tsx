@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Start</h1>
+      <h1>Start123</h1>
       <h2>Justyna</h2>
       <header className="App-header">{t('Welcome to React')}</header>
     </div>
