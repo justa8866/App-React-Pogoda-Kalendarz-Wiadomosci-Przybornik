@@ -26,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
-    "prepare": "husky install",
+    "prepare": "husky install && chmod ug+x .husky/*",
     "pre-commit": "lint-staged"
   },
   "eslintConfig": {
@@ -72,5 +72,6 @@
     "hooks": {
       "pre-commit": "npm run pre-commit"
     }
-  }
+  },
+  "format_on_save": true
 }
