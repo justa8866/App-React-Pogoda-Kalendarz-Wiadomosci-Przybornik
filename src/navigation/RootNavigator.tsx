@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage/HomePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import DashboardPage from '../pages/DashboardPage/DashboardPage';
+import ProtectedRoute from './ProtectiveRoot';
 
 function RootNavigator() {
   return (
@@ -13,7 +14,10 @@ function RootNavigator() {
         <Route path={RoutesList.Home} element={<HomePage />} />
         <Route path={RoutesList.Login} element={<LoginPage />} />
         <Route path={RoutesList.Register} element={<RegistrationPage />} />
-        <Route path={RoutesList.Dashboard} element={<DashboardPage />} />
+        <Route
+          path={RoutesList.Dashboard}
+          element={<ProtectedRoute outlet={<DashboardPage />} />}
+        />
       </Routes>
     </BrowserRouter>
   );

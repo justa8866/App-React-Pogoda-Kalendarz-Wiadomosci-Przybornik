@@ -19,6 +19,7 @@ export const userSlice = createSlice({
     signin: (state) => {
       const stateToModify = { ...state };
       stateToModify.isLoggedIn = true;
+
       return stateToModify;
     },
   },

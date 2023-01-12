@@ -26,15 +26,19 @@
   "rules": {
     "semi": 0,
     "comma-dangle": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "@typescript-eslint/strict-boolean-expressions": 0,
     "linebreak-style": 0,
     "react/function-component-definition": [
-        2,
-        {
-          "namedComponents": [ "arrow-function", "function-declaration"],
-          "unnamedComponents": "arrow-function"
-        }
-      ]
-    }
+      2,
+      {
+        "namedComponents": ["arrow-function", "function-declaration"],
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "newline-before-return": "error"
+  }
 }
