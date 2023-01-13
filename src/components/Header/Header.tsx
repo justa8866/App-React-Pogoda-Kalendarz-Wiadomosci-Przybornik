@@ -1,156 +1,173 @@
 import * as React from 'react';
-import { ColorPaletteProp } from '@mui/joy/styles';
-import Avatar from '@mui/joy/Avatar';
-import Badge from '@mui/joy/Badge';
-import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
-import ListDivider from '@mui/joy/ListDivider';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import Menu from '@mui/joy/Menu';
-import MenuItem from '@mui/joy/MenuItem';
-import Typography from '@mui/joy/Typography';
-import Sheet from '@mui/joy/Sheet';
-import Chip from '@mui/joy/Chip';
-import AddIcon from '@mui/icons-material/Add';
-import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import Toolbar from '@mui/material/Toolbar';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import Badge from '@mui/material/Badge';
+import {
+  Search,
+  SearchIconWrapper,
+  IconButtonNew,
+  IconButtonNewOne,
+  IconButtonNewTwo,
+  BoxNew,
+  AppBarNew,
+  TypographyNew,
+  StyledInputBaseNew,
+  BoxNewOne,
+  IconButtonFour,
+  IconButtonFive,
+  IconButtonSix,
+  BoxNewTwo,
+  IconButtonSeven,
+  SwitchNew,
+} from './Header.style';
 
-export default function ColorInversionHeader() {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-  const [color, setColor] = React.useState<ColorPaletteProp>('primary');
-  return (
-    <Sheet
-      variant="solid"
-      color={color}
-      invertedColors
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        flexGrow: 1,
-        p: 2,
-        mx: -3,
-        my: -3,
-        borderRadius: { xs: 0, sm: 'xs' },
-        minWidth: 'min-content',
-        ...(color !== 'warning' && {
-          background: (theme) => `linear-gradient(to top, ${theme.vars.palette[color][600]}, ${theme.vars.palette[color][500]})`,
-        }),
+export default function PrimarySearchAppBar() {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [auth, setAuth] = React.useState(true);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
       }}
+      id="primary-search-account-menu"
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
     >
-      <IconButton
-        variant="soft"
-        size="sm"
-        onClick={() => {
-          const colors: ColorPaletteProp[] = [
-            'primary',
-            'neutral',
-            'danger',
-            'info',
-            'success',
-            'warning',
-          ];
-          const nextColor = colors.indexOf(color);
-          setColor(colors[nextColor + 1] ?? colors[0]);
-        }}
-        sx={{ borderRadius: '50%' }}
-      >
-        <img alt="" src="/static/branding/pricing/block-gold.svg" />
-      </IconButton>
-      <Box sx={{
-        flex: 1, display: 'flex', gap: 1, px: 2,
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
       }}
-      >
-        <Chip
-          variant="outlined"
-          onClick={(event) => {
-            setAnchorEl(event.currentTarget);
-          }}
-          endDecorator={<KeyboardArrowDownIcon />}
-        >
-          Main
-        </Chip>
-        <Menu
-          variant="outlined"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-          placement="bottom-start"
-          disablePortal
-          size="sm"
-          sx={{
-            '--List-decorator-size': '24px',
-            '--List-item-minHeight': '40px',
-            '--List-divider-gap': '4px',
-            minWidth: 200,
-          }}
-        >
-          <MenuItem onClick={() => setAnchorEl(null)}>
-            <ListItemDecorator>
-              <BubbleChartIcon />
-            </ListItemDecorator>
-            Products
-          </MenuItem>
-          <ListDivider />
-          <MenuItem onClick={() => setAnchorEl(null)}>Pricing</MenuItem>
-          <MenuItem onClick={() => setAnchorEl(null)}>
-            Case studies
-            {' '}
-            <Chip
-              variant="outlined"
-              size="sm"
-              sx={{
-                ml: 'auto',
-                bgcolor: (theme) => `rgba(${theme.vars.palette.primary.mainChannel} / 0.1)`,
-              }}
-            >
-              Beta
-            </Chip>
-          </MenuItem>
-        </Menu>
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row-reverse', flexShrink: 0 }}>
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button
-            startDecorator={<AddIcon />}
-            sx={{ borderRadius: 'xl', display: { xs: 'none', md: 'inline-flex' } }}
-          >
-            New Invoice
-          </Button>
-          <Input
-            placeholder="Search for anything..."
-            variant="soft"
-            size="sm"
-            endDecorator={(
-              <Typography
-                component="span"
-                variant="outlined"
-                level="body3"
-                sx={{ bgcolor: 'background.surface', mx: 0 }}
-              >
-                ⌘K
-              </Typography>
-            )}
-            sx={{
-              '--Input-radius': '40px',
-              '--Input-paddingInline': '12px',
-              width: 160,
-              display: { xs: 'none', lg: 'flex' },
-            }}
-          />
-          <Badge badgeContent={2} variant="solid" color="danger">
-            <IconButton variant="soft" sx={{ borderRadius: 'xl' }}>
-              <NotificationsIcon />
-            </IconButton>
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButtonNew>
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
           </Badge>
-          <IconButton sx={{ borderRadius: 'xl' }}>
-            <Avatar src="/static/images/avatar/1.jpg" size="sm" />
-            <KeyboardArrowDownIcon />
-          </IconButton>
-        </Box>
-      </Box>
-    </Sheet>
+        </IconButtonNew>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButtonNewOne>
+          <Badge badgeContent={17} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButtonNewOne>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButtonNewTwo>
+          <AccountCircle />
+        </IconButtonNewTwo>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  return (
+    <BoxNew>
+      <AppBarNew>
+        <Toolbar>
+          <FormGroup>
+            <FormControlLabel
+              control={(
+                <SwitchNew
+                  checked={auth}
+                  onChange={handleChange}
+                />
+              )}
+              label={auth ? 'Logout' : 'Login'}
+            />
+          </FormGroup>
+          <TypographyNew>KIT</TypographyNew>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBaseNew />
+          </Search>
+          <BoxNew />
+          <BoxNewOne>
+            <IconButtonFour>
+              <Badge badgeContent={4} color="error">
+                <MailIcon />
+              </Badge>
+            </IconButtonFour>
+            <IconButtonFive>
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButtonFive>
+            <IconButtonSix onClick={handleProfileMenuOpen}>
+              <AccountCircle />
+            </IconButtonSix>
+          </BoxNewOne>
+          <BoxNewTwo>
+            <IconButtonSeven onClick={handleMobileMenuOpen}>
+              <MoreIcon />
+            </IconButtonSeven>
+          </BoxNewTwo>
+        </Toolbar>
+      </AppBarNew>
+      {renderMobileMenu}
+      {renderMenu}
+    </BoxNew>
   );
 }

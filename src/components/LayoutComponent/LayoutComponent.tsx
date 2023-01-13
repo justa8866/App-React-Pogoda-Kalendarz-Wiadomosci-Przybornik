@@ -8,10 +8,10 @@ type Props = {
 
 export default function LayoutComponent({ children }: Props) {
   return (
-    <div>
+    <>
       <Header />
       {children}
       <Footer />
-    </div>
+    </>
   );
 }
