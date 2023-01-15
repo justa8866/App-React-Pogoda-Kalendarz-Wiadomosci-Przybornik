@@ -7,7 +7,7 @@ import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import DashboardPage from '../pages/DashboardPage/DashboardPage';
 import AuthWrapper from './AuthWrapper';
 
-function RootNavigator() {
+function RootNavigator(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

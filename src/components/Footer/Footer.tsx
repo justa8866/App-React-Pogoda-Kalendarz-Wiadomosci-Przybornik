@@ -1,30 +1,22 @@
-import * as React from 'react';
+import React from 'react';
+import { Typography, Container } from '@mui/material';
+import BoxNew from './Footer.style';
 
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { LinkNew, BoxNew } from './Footer.style';
+const Copyright = () => (
+  <Typography variant="body2" color="text.secondary">
+    {'Copyright © '}
+    {new Date().getFullYear()}
+  </Typography>
+);
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <LinkNew>Your Website</LinkNew>
-      {' '}
-      {new Date().getFullYear()}
-      .
-      {' '}
-
-    </Typography>
-  );
-}
-
-export default function Footer() {
+function Footer(): JSX.Element {
   return (
     <BoxNew>
       <Container maxWidth="sm">
-        <Typography variant="body1">My footer can be found here.</Typography>
         <Copyright />
       </Container>
     </BoxNew>
   );
 }
+
+export default Footer;

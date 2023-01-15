@@ -6,7 +6,7 @@ import './App.css';
 import i18n from './location/i18';
 import RootNavigator from './navigation/RootNavigator';
 
-function App() {
+function App(): JSX.Element {
   return (
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>

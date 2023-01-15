@@ -1,15 +1,15 @@
 import React from 'react';
-import LayoutComponent from '../../components/LayoutComponent/LayoutComponent';
+import Layout from '../../components/Layout/Layout';
 
-function HomePage() {
+function HomePage(): JSX.Element {
   return (
     <div>
-      <LayoutComponent>
+      <Layout>
         <>
           <div>home</div>
           <h3>Justyna </h3>
         </>
-      </LayoutComponent>
+      </Layout>
     </div>
   );
 }

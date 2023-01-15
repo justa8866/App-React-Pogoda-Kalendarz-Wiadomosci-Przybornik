@@ -1,6 +1,6 @@
 import React from 'react';
 
-function RegistrationPage() {
+function RegistrationPage(): JSX.Element {
   return <div>registration</div>;
 }
 

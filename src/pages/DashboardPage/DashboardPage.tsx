@@ -1,6 +1,11 @@
 import React from 'react';
+import Layout from '../../components/Layout/Layout';
 
-function DashboardPage() {
-  return <div>Dashbord</div>;
+function DashboardPage(): JSX.Element {
+  return (
+    <Layout>
+      <div>Dashbord</div>
+    </Layout>
+  );
 }
 export default DashboardPage;

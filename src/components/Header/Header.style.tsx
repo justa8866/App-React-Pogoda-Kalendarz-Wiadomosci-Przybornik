@@ -1,9 +1,11 @@
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Typography from '@mui/material/Typography';
-import Switch from '@mui/material/Switch';
+import {
+  InputBase,
+  Toolbar,
+  Box,
+  AppBar,
+  Typography,
+  IconButton,
+} from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 
 export const Search = styled('div')(({ theme }) => ({
@@ -21,7 +23,7 @@ export const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
   placeholder: 'Search…',
-  inputProps: { 'aria-label': 'search' },
+  inputProps: { ariaLabel: 'search' },
 }));
 
 export const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -48,24 +50,8 @@ export const StyledInputBaseNew = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const IconButtonNew = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
-  ariaLabel: 'show 4 new mails',
-});
-
-export const IconButtonNewOne = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
-  ariaLabel: 'show 17 new mails',
-});
-
-export const IconButtonNewTwo = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
-  ariaLabel: 'account of current user',
-  arialLabel: 'primary-search-account-menu',
-  arialHaspopup: 'true',
+export const ToolbarNew = styled(Toolbar)({
+  columnGap: '10px',
 });
 
 export const BoxNew = styled(Box)({
@@ -78,15 +64,10 @@ export const AppBarNew = styled(AppBar)({
 });
 
 export const TypographyNew = styled(Typography)(({ theme }) => ({
-  [theme.breakpoints.only('sm')]: {
-    display: 'block',
-  },
-  [theme.breakpoints.only('xs')]: {
-    display: 'none',
-  },
   variant: theme.typography.h6 && {
     whiteSpace: 'nowrap',
     component: 'div',
+    marginRight: '20px',
   },
 }));
 
@@ -105,15 +86,11 @@ export const BoxNewOne = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const IconButtonFive = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
+export const IconButtonFive = styled(IconButtonFour)({
   ariaLabel: 'show 17 new notifications',
 });
 
-export const IconButtonSix = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
+export const IconButtonSix = styled(IconButtonFour)({
   ariaLabel: 'account of current user',
   edge: 'end',
   ariaControls: 'primary-search-account-menu',
@@ -129,17 +106,15 @@ export const BoxNewTwo = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const IconButtonSeven = styled(IconButton)({
-  color: 'inherit',
-  size: 'large',
-  ariaLabel: 'show more',
-  edge: 'end',
-  ariaControls: 'primary-search-account-menu',
-  ariaHaspopup: 'true',
-});
-
-export const SwitchNew = styled(Switch)({
-  ariaLabel: 'login switch',
-});
-
-// https://codesandbox.io/s/6ogv1g?file=/demo.tsx
+export const IconButtonSeven = styled(IconButtonFour)(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    display: 'flex',
+    ariaLabel: 'show more',
+    edge: 'end',
+    ariaControls: 'primary-search-account-menu',
+    ariaHaspopup: 'true',
+  },
+  [theme.breakpoints.up('sm')]: {
+    display: 'none',
+  },
+}));

@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { signin } from '../../store/auth/authSlice';
 import RoutesList from '../../navigation/routes';
 
-function LoginPage() {
+function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (

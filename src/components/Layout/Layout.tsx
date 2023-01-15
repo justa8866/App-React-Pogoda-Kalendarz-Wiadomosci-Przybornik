@@ -6,7 +6,7 @@ type Props = {
   children: JSX.Element,
 };
 
-export default function LayoutComponent({ children }: Props) {
+function Layout({ children }: Props) {
   return (
     <>
       <Header />
@@ -15,3 +15,5 @@ export default function LayoutComponent({ children }: Props) {
     </>
   );
 }
+
+export default Layout;
