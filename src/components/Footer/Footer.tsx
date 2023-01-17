@@ -1,21 +1,26 @@
 import React from 'react';
 import { Typography, Container } from '@mui/material';
-import BoxNew from './Footer.style';
+import { useTranslation } from 'react-i18next';
+import Wrapper from './Footer.style';
 
-const Copyright = () => (
-  <Typography variant="body2" color="text.secondary">
-    {'Copyright © '}
-    {new Date().getFullYear()}
-  </Typography>
-);
+const Copyright = () => {
+  const [t] = useTranslation();
+
+  return (
+    <Typography variant="body2" color="text.secondary">
+      {t('footer:copyright')}
+      2023
+    </Typography>
+  );
+};
 
 function Footer(): JSX.Element {
   return (
-    <BoxNew>
+    <Wrapper>
       <Container maxWidth="sm">
         <Copyright />
       </Container>
-    </BoxNew>
+    </Wrapper>
   );
 }
 

@@ -1,16 +1,11 @@
 import React from 'react';
-import Layout from '../../components/Layout/Layout';
+import LayoutWrapper from '../../components/LayoutWrapper/LayoutWrapper';
 
 function HomePage(): JSX.Element {
   return (
-    <div>
-      <Layout>
-        <>
-          <div>home</div>
-          <h3>Justyna </h3>
-        </>
-      </Layout>
-    </div>
+    <LayoutWrapper>
+      <h3>Justyna </h3>
+    </LayoutWrapper>
   );
 }
 

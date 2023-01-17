@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
@@ -6,27 +7,21 @@ const initialState = {
   isMobileMenuOpen: false,
 };
 
-export const menuSlice = createSlice({
-  name: 'menu',
+export const utilSlice = createSlice({
+  name: 'util',
   initialState,
   reducers: {
-    handleMobileMenuChange: (state) => {
-      const stateValue = { ...state };
-      stateValue.isMobileMenuOpen = !state.isMobileMenuOpen;
-
-      return stateValue;
+    toggleMobileMenuChange: (state) => {
+      state.isMobileMenuOpen = !state.isMobileMenuOpen;
     },
-    handleProfileMenuChange: (state) => {
-      const stateValue = { ...state };
-      stateValue.isProfileMenuOpen = !state.isProfileMenuOpen;
-
-      return stateValue;
+    toggleProfileMenuChange: (state) => {
+      state.isProfileMenuOpen = !state.isProfileMenuOpen;
     },
   },
 });
 
 export const selectMenu = (state: RootState) => state.menu;
 
-export const { handleMobileMenuChange, handleProfileMenuChange } = menuSlice.actions;
+export const { toggleMobileMenuChange, toggleProfileMenuChange } = utilSlice.actions;
 
-export default menuSlice.reducer;
+export default utilSlice.reducer;

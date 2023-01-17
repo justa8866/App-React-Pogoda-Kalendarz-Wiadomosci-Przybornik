@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
 type Props = {
-  children: JSX.Element,
+  children: ReactNode;
 };
 
-function Layout({ children }: Props) {
+function LayoutWrapper({ children }: Props) {
   return (
     <>
       <Header />
@@ -16,4 +16,4 @@ function Layout({ children }: Props) {
   );
 }
 
-export default Layout;
+export default LayoutWrapper;

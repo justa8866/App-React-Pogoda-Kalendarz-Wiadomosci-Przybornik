@@ -1,14 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Menu, MenuItem } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../store/hooks';
 import { logout } from '../../../store/auth/authSlice';
 import {
-  handleProfileMenuChange,
+  toggleProfileMenuChange,
   selectMenu,
 } from '../../../store/menu/menuSlice';
 
 function NavMenu(): JSX.Element {
+  const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const { isProfileMenuOpen } = useSelector(selectMenu);
 
@@ -18,22 +20,24 @@ function NavMenu(): JSX.Element {
         vertical: 'top',
         horizontal: 'right',
       }}
-      id="primary-search-account-menu"
+      id={t('header:idSearchAcountMenu')}
       keepMounted
       transformOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
       open={isProfileMenuOpen}
-      onClose={() => dispatch(handleProfileMenuChange())}
+      onClose={() => dispatch(toggleProfileMenuChange())}
     >
-      <MenuItem onClick={() => dispatch(handleProfileMenuChange())}>
-        Profile
+      <MenuItem onClick={() => dispatch(toggleProfileMenuChange())}>
+        {t('header:textProfile')}
       </MenuItem>
-      <MenuItem onClick={() => dispatch(handleProfileMenuChange())}>
-        My account
+      <MenuItem onClick={() => dispatch(toggleProfileMenuChange())}>
+        {t('header:textMyAccount')}
       </MenuItem>
-      <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
+      <MenuItem onClick={() => dispatch(logout())}>
+        {t('header:textLogout')}
+      </MenuItem>
     </Menu>
   );
 

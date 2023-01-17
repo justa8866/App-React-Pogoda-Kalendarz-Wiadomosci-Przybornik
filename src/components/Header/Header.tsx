@@ -1,36 +1,34 @@
 import React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import Badge from '@mui/material/Badge';
 
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../store/auth/authSlice';
 import { IUser } from '../../types/user/IUser.type';
-import { handleMobileMenuChange, handleProfileMenuChange } from '../../store/menu/menuSlice';
+import {
+  toggleMobileMenuChange,
+  toggleProfileMenuChange,
+} from '../../store/menu/menuSlice';
 import { useAppDispatch } from '../../store/hooks';
 
 import {
-  Search,
-  SearchIconWrapper,
-  BoxNew,
-  AppBarNew,
-  ToolbarNew,
-  TypographyNew,
-  StyledInputBaseNew,
-  BoxNewOne,
-  IconButtonFour,
-  IconButtonFive,
-  IconButtonSix,
-  BoxNewTwo,
-  IconButtonSeven,
+  Container,
+  AdditionalSpaceBetweenElements,
+  ToolbarContainer,
+  Wrapper,
+  AppName,
+  IconsWrapper,
 } from './Header.style';
 import RoutesList from '../../navigation/routes';
 import Navigation from '../Navigation/Navigation';
+import SearchElement from './SearchElement/SearchElement';
+import Icon from './Icon/Icon';
+import ShowMoreElement from './ShowMoreElement/ShowMoreElement';
 
 function Header(): JSX.Element {
+  const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoggedIn }: IUser = useSelector(selectUser);
 
@@ -39,45 +37,49 @@ function Header(): JSX.Element {
       window.location.href = RoutesList.Login;
     }
 
-    dispatch(handleProfileMenuChange());
+    dispatch(toggleProfileMenuChange());
   };
 
   return (
-    <BoxNew>
-      <AppBarNew>
-        <ToolbarNew>
-          <TypographyNew>KIT</TypographyNew>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBaseNew />
-          </Search>
-          <BoxNew />
-          <BoxNewOne>
-            <IconButtonFour>
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButtonFour>
-            <IconButtonFive>
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButtonFive>
-            <IconButtonSix onClick={handleProfileMenuOpen}>
-              <AccountCircle />
-            </IconButtonSix>
-          </BoxNewOne>
-          <BoxNewTwo>
-            <IconButtonSeven onClick={() => dispatch(handleMobileMenuChange())}>
-              <MoreIcon />
-            </IconButtonSeven>
-          </BoxNewTwo>
-        </ToolbarNew>
-      </AppBarNew>
+    <Container>
+      <Wrapper>
+        <ToolbarContainer>
+          <AppName>{t('header:name')}</AppName>
+          <SearchElement
+            placeholder={t('header:placeholderSearch')}
+            inputProps={{ ariaLabel: t('header:labelSearch') }}
+          />
+          <AdditionalSpaceBetweenElements />
+          <IconsWrapper>
+            <Icon
+              label={t('header:messageMail')}
+              badgeNumber={4}
+              icon={<MailIcon />}
+            />
+            <Icon
+              label={t('header:messageNotifications')}
+              badgeNumber={17}
+              icon={<NotificationsIcon />}
+            />
+            <Icon
+              onClick={handleProfileMenuOpen}
+              label={t('header:messageAccountCircle')}
+              badgeNumber={17}
+              icon={<AccountCircle />}
+              edge="end"
+              ariaControls={t('header:idSearchAcountMenu')}
+              ariaHaspopup
+            />
+          </IconsWrapper>
+          <ShowMoreElement
+            label="show more"
+            ariaControls={t('header:idSearchAcountMenu')}
+            onClick={() => dispatch(toggleMobileMenuChange())}
+          />
+        </ToolbarContainer>
+      </Wrapper>
       <Navigation />
-    </BoxNew>
+    </Container>
   );
 }
 

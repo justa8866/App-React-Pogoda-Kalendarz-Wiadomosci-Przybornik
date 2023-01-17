@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const BoxNew = styled(Box)({
+const Wrapper = styled(Box)({
   backgroundColor: 'rgb(211,211,211)',
   '&:hover': {
     backgroundColor: 'rgb(192,192,192)',
@@ -15,4 +15,4 @@ const BoxNew = styled(Box)({
   bottom: '0',
 });
 
-export default BoxNew;
+export default Wrapper;
