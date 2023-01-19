@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton, Badge } from '@mui/material';
 
 interface IIcon {
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void ;
   label: string;
   edge?: false | 'start' | 'end' | undefined;
   ariaControls?: string | undefined;

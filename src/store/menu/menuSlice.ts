@@ -2,26 +2,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-const initialState = {
-  isProfileMenuOpen: false,
-  isMobileMenuOpen: false,
+interface IMenuState {
+  profileMenuAnchorEl: null | HTMLElement,
+  mobileMenuAnchorEl: null | HTMLElement,
+}
+
+const initialState: IMenuState = {
+  profileMenuAnchorEl: null,
+  mobileMenuAnchorEl: null,
 };
 
 export const utilSlice = createSlice({
   name: 'util',
   initialState,
   reducers: {
-    toggleMobileMenuChange: (state) => {
-      state.isMobileMenuOpen = !state.isMobileMenuOpen;
+    setProfileMenuAnchorEl: (state, el) => {
+      state.profileMenuAnchorEl = el.payload;
     },
-    toggleProfileMenuChange: (state) => {
-      state.isProfileMenuOpen = !state.isProfileMenuOpen;
+    setMobileMenuAnchorEl: (state, el) => {
+      state.mobileMenuAnchorEl = el.payload;
     },
   },
 });
 
 export const selectMenu = (state: RootState) => state.menu;
 
-export const { toggleMobileMenuChange, toggleProfileMenuChange } = utilSlice.actions;
+export const { setProfileMenuAnchorEl, setMobileMenuAnchorEl } = utilSlice.actions;
 
 export default utilSlice.reducer;

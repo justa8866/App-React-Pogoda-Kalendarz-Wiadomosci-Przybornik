@@ -1,23 +1,19 @@
 const translation = {
-  common: {},
+  common: {
+    textLang: 'lang.',
+    dashboard: 'KIT - dashboard',
+  },
   validation: {},
   footer: {
-    copyright: `Copyright ${'\u00a9'} `,
+    copyright: 'Copyright \u00a9 {{ year }}',
   },
   header: {
     name: 'KIT',
-    placeholderSearch: 'Search...',
-    labelSearch: 'search',
-    messageMail: 'show 4 new mails',
-    messageNotifications: 'show 17 new notifications',
-    messageAccountCircle: 'account of current user',
-    idSearchAcountMenu: 'primary-search-account-menu',
-    idSearchAcountMenuMobile: 'primary-search-account-menu-mobile',
     textMessages: 'Messages',
     textProfile: 'Profile',
     textNotifications: 'Notifications',
     textMyAccount: 'My account',
-    textLogout: 'Wyloguj się',
+    textLogout: 'Logout',
   },
 };
 

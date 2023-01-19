@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../store/hooks';
 
 import {
-  toggleMobileMenuChange,
-  toggleProfileMenuChange,
+  setMobileMenuAnchorEl,
+  setProfileMenuAnchorEl,
   selectMenu,
 } from '../../../store/menu/menuSlice';
 
@@ -18,38 +18,39 @@ import MenuElement from './MenuElement/MenuElement';
 function MobileNavMenu(): JSX.Element {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
-  const { isMobileMenuOpen } = useSelector(selectMenu);
+  const { mobileMenuAnchorEl } = useSelector(selectMenu);
 
   const renderMobileMenu = (
     <MenuNav
+      anchorEl={mobileMenuAnchorEl}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
-      id={t('header:idSearchAcountMenuMobile')}
+      id="search-account-menu-mobile"
       keepMounted
       transformOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
-      open={isMobileMenuOpen}
-      onClose={() => dispatch(toggleMobileMenuChange())}
+      open={!!mobileMenuAnchorEl}
+      onClose={() => dispatch(setMobileMenuAnchorEl(null))}
     >
       <MenuElement
-        label={t('header:messageMail')}
+        label="mails"
         badgeNumber={4}
         icon={<MailIcon />}
         text={t('header:textMessages')}
       />
       <MenuElement
-        label={t('header:messageNotifications')}
+        label="notifications"
         badgeNumber={17}
         icon={<NotificationsIcon />}
         text={t('header:textNotifications')}
       />
       <MenuElement
-        onClick={() => dispatch(toggleProfileMenuChange())}
-        label={t('header:messageAccountCircle')}
+        onClick={(event) => dispatch(setProfileMenuAnchorEl(event.currentTarget))}
+        label="account of current user"
         badgeNumber={17}
         icon={<AccountCircle />}
         text={t('header:textProfile')}

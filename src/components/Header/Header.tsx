@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../store/auth/authSlice';
 import { IUser } from '../../types/user/IUser.type';
 import {
-  toggleMobileMenuChange,
-  toggleProfileMenuChange,
+  setMobileMenuAnchorEl,
+  setProfileMenuAnchorEl,
 } from '../../store/menu/menuSlice';
 import { useAppDispatch } from '../../store/hooks';
 
@@ -26,18 +26,19 @@ import Navigation from '../Navigation/Navigation';
 import SearchElement from './SearchElement/SearchElement';
 import Icon from './Icon/Icon';
 import ShowMoreElement from './ShowMoreElement/ShowMoreElement';
+import LanguageSelector from '../../common/LanguageSelector/LanguageSelector';
 
 function Header(): JSX.Element {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
   const { isLoggedIn }: IUser = useSelector(selectUser);
 
-  const handleProfileMenuOpen = () => {
+  const handleProfileMenuOpen = (event: { currentTarget: any }) => {
     if (!isLoggedIn) {
       window.location.href = RoutesList.Login;
     }
 
-    dispatch(toggleProfileMenuChange());
+    dispatch(setProfileMenuAnchorEl(event.currentTarget));
   };
 
   return (
@@ -45,36 +46,30 @@ function Header(): JSX.Element {
       <Wrapper>
         <ToolbarContainer>
           <AppName>{t('header:name')}</AppName>
-          <SearchElement
-            placeholder={t('header:placeholderSearch')}
-            inputProps={{ ariaLabel: t('header:labelSearch') }}
-          />
+          <SearchElement inputProps={{ ariaLabel: 'search' }} />
           <AdditionalSpaceBetweenElements />
           <IconsWrapper>
+            <Icon label="mails" badgeNumber={4} icon={<MailIcon />} />
             <Icon
-              label={t('header:messageMail')}
-              badgeNumber={4}
-              icon={<MailIcon />}
-            />
-            <Icon
-              label={t('header:messageNotifications')}
+              label="notifications"
               badgeNumber={17}
               icon={<NotificationsIcon />}
             />
             <Icon
               onClick={handleProfileMenuOpen}
-              label={t('header:messageAccountCircle')}
+              label="account of current user"
               badgeNumber={17}
               icon={<AccountCircle />}
               edge="end"
-              ariaControls={t('header:idSearchAcountMenu')}
+              ariaControls="account-profile-menu"
               ariaHaspopup
             />
           </IconsWrapper>
+          <LanguageSelector />
           <ShowMoreElement
             label="show more"
-            ariaControls={t('header:idSearchAcountMenu')}
-            onClick={() => dispatch(toggleMobileMenuChange())}
+            ariaControls="search-account-menu-show-more"
+            onClick={(event) => dispatch(setMobileMenuAnchorEl(event.currentTarget))}
           />
         </ToolbarContainer>
       </Wrapper>

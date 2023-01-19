@@ -7,14 +7,12 @@ import {
 } from './SearchElement.style';
 
 interface ISearchElement {
-  placeholder: string;
   inputProps: {
     ariaLabel: string ;
   };
 }
-const SearchElement = ({ placeholder, inputProps }: ISearchElement) => (
+const SearchElement = ({ inputProps }: ISearchElement) => (
   <Search
-    placeholder={placeholder}
     input-props={{
       ariaLabel: { inputProps },
     }}
