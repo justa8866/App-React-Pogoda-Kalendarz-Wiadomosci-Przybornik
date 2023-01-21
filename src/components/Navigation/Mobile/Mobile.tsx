@@ -1,28 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../../store/hooks';
 
-import {
-  setMobileMenuAnchorEl,
-  setProfileMenuAnchorEl,
-  selectMenu,
-} from '../../../store/menu/menuSlice';
-
-import { MenuNav } from './MobileNavMenu.style';
-import MenuElement from './MenuElement/MenuElement';
+import { MenuNav } from './Mobile.style';
+import MenuElement from '../Element/Element';
+import { NavActionKind, useNav } from '../Reducer/Nav';
 
 function MobileNavMenu(): JSX.Element {
   const [t] = useTranslation();
-  const dispatch = useAppDispatch();
-  const { mobileMenuAnchorEl } = useSelector(selectMenu);
+  const [state, dispatch] = useNav();
 
   const renderMobileMenu = (
     <MenuNav
-      anchorEl={mobileMenuAnchorEl}
+      anchorEl={state.mobileMenuAnchorEl}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -33,27 +25,33 @@ function MobileNavMenu(): JSX.Element {
         vertical: 'top',
         horizontal: 'right',
       }}
-      open={!!mobileMenuAnchorEl}
-      onClose={() => dispatch(setMobileMenuAnchorEl(null))}
+      open={!!state.mobileMenuAnchorEl}
+      onClose={() => dispatch({
+        type: NavActionKind.mobileMenuAnchorElSet,
+        payload: null,
+      })}
     >
       <MenuElement
-        label="mails"
+        label={t('header.textMessages')}
         badgeNumber={4}
         icon={<MailIcon />}
-        text={t('header:textMessages')}
+        text={t('header.textMessages')}
       />
       <MenuElement
-        label="notifications"
+        label={t('header.textNotifications')}
         badgeNumber={17}
         icon={<NotificationsIcon />}
-        text={t('header:textNotifications')}
+        text={t('header.textNotifications')}
       />
       <MenuElement
-        onClick={(event) => dispatch(setProfileMenuAnchorEl(event.currentTarget))}
-        label="account of current user"
+        onClick={(event) => dispatch({
+          type: NavActionKind.profileMenuAnchorElSet,
+          payload: event.currentTarget,
+        })}
+        label={t('header.textAccount')}
         badgeNumber={17}
         icon={<AccountCircle />}
-        text={t('header:textProfile')}
+        text={t('header.textProfile')}
       />
     </MenuNav>
   );

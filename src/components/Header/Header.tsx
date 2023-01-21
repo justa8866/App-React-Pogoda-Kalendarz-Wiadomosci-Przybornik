@@ -7,11 +7,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../store/auth/authSlice';
 import { IUser } from '../../types/user/IUser.type';
-import {
-  setMobileMenuAnchorEl,
-  setProfileMenuAnchorEl,
-} from '../../store/menu/menuSlice';
-import { useAppDispatch } from '../../store/hooks';
 
 import {
   Container,
@@ -27,37 +22,47 @@ import SearchElement from './SearchElement/SearchElement';
 import Icon from './Icon/Icon';
 import ShowMoreElement from './ShowMoreElement/ShowMoreElement';
 import LanguageSelector from '../../common/LanguageSelector/LanguageSelector';
+import { NavActionKind, useNav } from '../Navigation/Reducer/Nav';
 
 function Header(): JSX.Element {
   const [t] = useTranslation();
-  const dispatch = useAppDispatch();
   const { isLoggedIn }: IUser = useSelector(selectUser);
+  const [, dispatch] = useNav();
 
-  const handleProfileMenuOpen = (event: { currentTarget: any }) => {
+  const handleProfileMenuOpen = (event: { currentTarget: HTMLElement }) => {
     if (!isLoggedIn) {
       window.location.href = RoutesList.Login;
+
+      return;
     }
 
-    dispatch(setProfileMenuAnchorEl(event.currentTarget));
+    dispatch({
+      type: NavActionKind.profileMenuAnchorElSet,
+      payload: event.currentTarget,
+    });
   };
 
   return (
     <Container>
       <Wrapper>
         <ToolbarContainer>
-          <AppName>{t('header:name')}</AppName>
-          <SearchElement inputProps={{ ariaLabel: 'search' }} />
+          <AppName>{t('header.name')}</AppName>
+          <SearchElement inputProps={{ ariaLabel: t('header.textSearch') }} />
           <AdditionalSpaceBetweenElements />
           <IconsWrapper>
-            <Icon label="mails" badgeNumber={4} icon={<MailIcon />} />
             <Icon
-              label="notifications"
+              label={t('header.textMessages')}
+              badgeNumber={4}
+              icon={<MailIcon />}
+            />
+            <Icon
+              label={t('header.textNotifications')}
               badgeNumber={17}
               icon={<NotificationsIcon />}
             />
             <Icon
               onClick={handleProfileMenuOpen}
-              label="account of current user"
+              label={t('header.textNotifications')}
               badgeNumber={17}
               icon={<AccountCircle />}
               edge="end"
@@ -67,9 +72,12 @@ function Header(): JSX.Element {
           </IconsWrapper>
           <LanguageSelector />
           <ShowMoreElement
-            label="show more"
+            label={t('header.textShowMore')}
             ariaControls="search-account-menu-show-more"
-            onClick={(event) => dispatch(setMobileMenuAnchorEl(event.currentTarget))}
+            onClick={(event) => dispatch({
+              type: NavActionKind.mobileMenuAnchorElSet,
+              payload: event.currentTarget,
+            })}
           />
         </ToolbarContainer>
       </Wrapper>

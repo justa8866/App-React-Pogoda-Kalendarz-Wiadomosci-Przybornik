@@ -22,21 +22,17 @@ export default function LanguageSelect() {
   return (
     <Wrapper>
       <FormControl fullWidth>
-        <Input
-          id="simple-select-label"
-        >
-          {t('common:textLang')}
-
-        </Input>
+        <Input id="simple-select-label">{t('common.textLang')}</Input>
         <Select
           labelId="simple-select-label"
           id="simple-select"
-          label="Lang"
+          label={t('common.textLang')}
           value={lang}
           onChange={handleChange}
         >
           <MenuItem value="pl">PL</MenuItem>
           <MenuItem value="en">EN</MenuItem>
+          <MenuItem value="de">DE</MenuItem>
         </Select>
       </FormControl>
     </Wrapper>

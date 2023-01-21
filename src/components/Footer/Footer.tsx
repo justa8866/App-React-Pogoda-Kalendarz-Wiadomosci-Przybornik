@@ -10,7 +10,7 @@ const Copyright = (): JSX.Element => {
 
   return (
     <Typography variant="body2" color="text.secondary">
-      {t('footer:copyright', { year: currentYear })}
+      {t('footer.copyright', { year: currentYear })}
     </Typography>
   );
 };

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import NavProvider from '../Navigation/Reducer/Nav';
 
 type Props = {
   children: ReactNode;
@@ -8,11 +9,11 @@ type Props = {
 
 function LayoutWrapper({ children }: Props) {
   return (
-    <>
+    <NavProvider>
       <Header />
       {children}
       <Footer />
-    </>
+    </NavProvider>
   );
 }
 

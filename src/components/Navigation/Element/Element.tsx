@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, MenuItem } from '@mui/material';
-import { IconButtonElement } from './MenuElement.style';
+import { IconButtonElement } from './Element.style';
 
 interface IMenuElement {
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -10,12 +10,8 @@ interface IMenuElement {
   text: string;
 }
 
-const MenuElement = ({
-  onClick,
-  label,
-  text,
-  badgeNumber,
-  icon,
+const Element = ({
+  onClick, label, text, badgeNumber, icon,
 }: IMenuElement) => (
   <MenuItem onClick={onClick}>
     <IconButtonElement aria-label={label}>
@@ -27,4 +23,4 @@ const MenuElement = ({
   </MenuItem>
 );
 
-export default MenuElement;
+export default Element;

@@ -1,12 +1,12 @@
 import React from 'react';
-import MobileNavMenu from './MobileNavMenu/MobileNavMenu';
-import NavMenu from './NavMenu/NavMenu';
+import Mobile from './Mobile/Mobile';
+import Profile from './Profile/Profile';
 
 function Navigation(): JSX.Element {
   return (
     <>
-      <NavMenu />
-      <MobileNavMenu />
+      <Profile />
+      <Mobile />
     </>
   );
 }
