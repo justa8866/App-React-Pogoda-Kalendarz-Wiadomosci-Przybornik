@@ -12,7 +12,7 @@ function AuthWrapper(): JSX.Element {
   return isLoggedIn ? (
     <Outlet />
   ) : (
-    <Navigate to={RoutesList.Login} replace state={{ from: location }} />
+    <Navigate to={RoutesList.Auth} replace state={{ from: location }} />
   );
 }
 

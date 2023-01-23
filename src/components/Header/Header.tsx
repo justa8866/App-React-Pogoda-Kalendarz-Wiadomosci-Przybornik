@@ -31,7 +31,7 @@ function Header(): JSX.Element {
 
   const handleProfileMenuOpen = (event: { currentTarget: HTMLElement }) => {
     if (!isLoggedIn) {
-      window.location.href = RoutesList.Login;
+      window.location.href = RoutesList.Auth;
 
       return;
     }
