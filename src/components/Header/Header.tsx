@@ -1,173 +1,89 @@
-import * as React from 'react';
-import Toolbar from '@mui/material/Toolbar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import SearchIcon from '@mui/icons-material/Search';
+import React from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import Badge from '@mui/material/Badge';
+
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { selectUser } from '../../store/auth/authSlice';
+import { IUser } from '../../types/user/IUser.type';
+
 import {
-  Search,
-  SearchIconWrapper,
-  IconButtonNew,
-  IconButtonNewOne,
-  IconButtonNewTwo,
-  BoxNew,
-  AppBarNew,
-  TypographyNew,
-  StyledInputBaseNew,
-  BoxNewOne,
-  IconButtonFour,
-  IconButtonFive,
-  IconButtonSix,
-  BoxNewTwo,
-  IconButtonSeven,
-  SwitchNew,
+  Container,
+  AdditionalSpaceBetweenElements,
+  ToolbarContainer,
+  Wrapper,
+  AppName,
+  IconsWrapper,
 } from './Header.style';
+import RoutesList from '../../navigation/routes';
+import Navigation from '../Navigation/Navigation';
+import SearchElement from './SearchElement/SearchElement';
+import Icon from './Icon/Icon';
+import ShowMoreElement from './ShowMoreElement/ShowMoreElement';
+import LanguageSelector from '../../common/LanguageSelector/LanguageSelector';
+import { NavActionKind, useNav } from '../Navigation/Reducer/Nav';
 
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [auth, setAuth] = React.useState(true);
+function Header(): JSX.Element {
+  const [t] = useTranslation();
+  const { isLoggedIn }: IUser = useSelector(selectUser);
+  const [, dispatch] = useNav();
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const handleProfileMenuOpen = (event: { currentTarget: HTMLElement }) => {
+    if (!isLoggedIn) {
+      window.location.href = RoutesList.Login;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
+      return;
+    }
+
+    dispatch({
+      type: NavActionKind.profileMenuAnchorElSet,
+      payload: event.currentTarget,
+    });
   };
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id="primary-search-account-menu"
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButtonNew>
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButtonNew>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButtonNewOne>
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButtonNewOne>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButtonNewTwo>
-          <AccountCircle />
-        </IconButtonNewTwo>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
-    <BoxNew>
-      <AppBarNew>
-        <Toolbar>
-          <FormGroup>
-            <FormControlLabel
-              control={(
-                <SwitchNew
-                  checked={auth}
-                  onChange={handleChange}
-                />
-              )}
-              label={auth ? 'Logout' : 'Login'}
+    <Container>
+      <Wrapper>
+        <ToolbarContainer>
+          <AppName>{t('header.name')}</AppName>
+          <SearchElement inputProps={{ ariaLabel: t('header.textSearch') }} />
+          <AdditionalSpaceBetweenElements />
+          <IconsWrapper>
+            <Icon
+              label={t('header.textMessages')}
+              badgeNumber={4}
+              icon={<MailIcon />}
             />
-          </FormGroup>
-          <TypographyNew>KIT</TypographyNew>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBaseNew />
-          </Search>
-          <BoxNew />
-          <BoxNewOne>
-            <IconButtonFour>
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButtonFour>
-            <IconButtonFive>
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButtonFive>
-            <IconButtonSix onClick={handleProfileMenuOpen}>
-              <AccountCircle />
-            </IconButtonSix>
-          </BoxNewOne>
-          <BoxNewTwo>
-            <IconButtonSeven onClick={handleMobileMenuOpen}>
-              <MoreIcon />
-            </IconButtonSeven>
-          </BoxNewTwo>
-        </Toolbar>
-      </AppBarNew>
-      {renderMobileMenu}
-      {renderMenu}
-    </BoxNew>
+            <Icon
+              label={t('header.textNotifications')}
+              badgeNumber={17}
+              icon={<NotificationsIcon />}
+            />
+            <Icon
+              onClick={handleProfileMenuOpen}
+              label={t('header.textNotifications')}
+              badgeNumber={17}
+              icon={<AccountCircle />}
+              edge="end"
+              ariaControls="account-profile-menu"
+              ariaHaspopup
+            />
+          </IconsWrapper>
+          <LanguageSelector />
+          <ShowMoreElement
+            label={t('header.textShowMore')}
+            ariaControls="search-account-menu-show-more"
+            onClick={(event) => dispatch({
+              type: NavActionKind.mobileMenuAnchorElSet,
+              payload: event.currentTarget,
+            })}
+          />
+        </ToolbarContainer>
+      </Wrapper>
+      <Navigation />
+    </Container>
   );
 }
+
+export default Header;

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../types/user/IUser.type';
 import type { RootState } from '../store';
@@ -17,10 +18,7 @@ export const userSlice = createSlice({
   reducers: {
     logout: () => initialState,
     signin: (state) => {
-      const stateToModify = { ...state };
-      stateToModify.isLoggedIn = true;
-
-      return stateToModify;
+      state.isLoggedIn = true;
     },
   },
 });

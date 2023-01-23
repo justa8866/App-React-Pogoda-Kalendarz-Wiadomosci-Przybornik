@@ -39,6 +39,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "newline-before-return": "error"
+    "newline-before-return": "error",
+    "react/require-default-props": 0
   }
 }

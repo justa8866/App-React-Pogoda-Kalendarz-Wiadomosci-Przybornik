@@ -1,30 +1,28 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
+import { Typography, Container } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Wrapper from './Footer.style';
 
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { LinkNew, BoxNew } from './Footer.style';
+const Copyright = (): JSX.Element => {
+  const [t] = useTranslation();
 
-function Copyright() {
+  const currentYear: number = useMemo(() => new Date().getFullYear(), []);
+
   return (
     <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <LinkNew>Your Website</LinkNew>
-      {' '}
-      {new Date().getFullYear()}
-      .
-      {' '}
-
+      {t('footer.copyright', { year: currentYear })}
     </Typography>
   );
-}
+};
 
-export default function Footer() {
+function Footer(): JSX.Element {
   return (
-    <BoxNew>
+    <Wrapper>
       <Container maxWidth="sm">
-        <Typography variant="body1">My footer can be found here.</Typography>
         <Copyright />
       </Container>
-    </BoxNew>
+    </Wrapper>
   );
 }
+
+export default Footer;
