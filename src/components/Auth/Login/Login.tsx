@@ -1,14 +1,13 @@
 import React from 'react';
 
-import {
-  Box, Checkbox, FormControlLabel, TextField,
-} from '@mui/material';
+import { Box, Checkbox, FormControlLabel } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../store/hooks';
 import { signin } from '../../../store/auth/authSlice';
 import RoutesList from '../../../navigation/routes';
-import { SubmitButton, SubmitLink } from '../Auth.style';
+import { SubmitLink, SubmitButton } from '../Auth.style';
+import Input from '../../../common/Input/Input';
 
 function Login(): JSX.Element {
   const [t] = useTranslation();
@@ -20,21 +19,14 @@ function Login(): JSX.Element {
 
   return (
     <Box component="form" onSubmit={handleSubmit} noValidate>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
+      <Input
         id="email"
         type="email"
         label={t('auth.email')}
         name="email"
         autoComplete="email"
-        autoFocus
       />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
+      <Input
         name="password"
         label={t('auth.password')}
         type="password"
