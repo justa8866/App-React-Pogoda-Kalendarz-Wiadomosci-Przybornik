@@ -1,7 +1,6 @@
 enum RoutesList {
   Home = '/',
-  Login = '/login',
-  Register = '/register',
+  Auth = '/auth',
   Dashboard = '/dashboard',
 }
 

@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, ThemeProvider } from '@mui/material';
 import App from './App';
 import './index.css';
+import theme from './components/Theme/Theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -10,8 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<LinearProgress />}>
-      <App />
-    </Suspense>
+    <ThemeProvider theme={theme}>
+      <Suspense fallback={<LinearProgress />}>
+        <App />
+      </Suspense>
+    </ThemeProvider>
   </React.StrictMode>,
 );
