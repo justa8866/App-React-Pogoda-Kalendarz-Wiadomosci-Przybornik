@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import {
   Container, CssBaseline, Stack, Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DefaultHeader from '../../common/DefaultHeader/DefaultHeader';
 import { CustomBox, MainLockIcon, Wrapper } from './AuthPage.style';

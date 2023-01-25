@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
@@ -10,4 +10,9 @@ export const SubmitButton = styled(Button)({
 
 export const SubmitLink = styled(Link)({
   textDecoration: 'none',
+});
+
+export const CustomPaper = styled(Paper)({
+  padding: 20,
+  margin: '0 auto',
 });
