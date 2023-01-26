@@ -2,23 +2,16 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { CustomPaper, SubmitButton } from '../Auth.style';
-import validationSchema from './ValidationScheme';
 import FormikTextField from '../FormikTextField/FormikTextField';
+import { initialValuesRegistration, registrationSchema } from './Registration.validation';
 
 function Registration(): JSX.Element {
   const [t] = useTranslation();
 
   return (
     <Formik
-      initialValues={{
-        username: '',
-        age: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        confirmEmail: '',
-      }}
-      validationSchema={validationSchema}
+      initialValues={initialValuesRegistration}
+      validationSchema={registrationSchema}
       onSubmit={() => {}}
     >
       <Form>
@@ -63,7 +56,6 @@ function Registration(): JSX.Element {
             autoComplete="current-password"
           />
           <SubmitButton type="submit" fullWidth variant="contained">
-
             {t('common.registration')}
           </SubmitButton>
         </CustomPaper>

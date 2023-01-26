@@ -6,19 +6,16 @@ import { Checkbox, FormControlLabel } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import { CustomPaper, SubmitButton } from '../Auth.style';
-import validationSchema from './ValidationScheme';
 import FormikTextField from '../FormikTextField/FormikTextField';
+import { initialValuesLogin, loginSchema } from './Login.validation';
 
 function Login(): JSX.Element {
   const [t] = useTranslation();
 
   return (
     <Formik
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      validationSchema={validationSchema}
+      initialValues={initialValuesLogin}
+      validationSchema={loginSchema}
       onSubmit={() => {}}
     >
       <Form>
@@ -30,7 +27,6 @@ function Login(): JSX.Element {
             name="email"
             autoComplete="email"
           />
-
           <FormikTextField
             name="password"
             label={t('auth.password')}
@@ -38,13 +34,11 @@ function Login(): JSX.Element {
             id="password"
             autoComplete="current-password"
           />
-
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label={t('auth.rememberMe')}
           />
           <SubmitButton type="submit" fullWidth variant="contained">
-
             {t('common.login')}
           </SubmitButton>
         </CustomPaper>
