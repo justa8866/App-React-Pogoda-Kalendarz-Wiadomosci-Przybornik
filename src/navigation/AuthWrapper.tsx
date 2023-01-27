@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import RoutesList from './routes';
 import { selectUser } from '../store/auth/authSlice';
-import { IUser } from '../types/user/IUser.type';
+import { IUser } from '../types/user/IUser.types';
 
 function AuthWrapper(): JSX.Element {
   const { isLoggedIn }: IUser = useSelector(selectUser);

@@ -6,7 +6,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { selectUser } from '../../store/auth/authSlice';
-import { IUser } from '../../types/user/IUser.type';
+import { IUser } from '../../types/user/IUser.types';
 
 import {
   Container,

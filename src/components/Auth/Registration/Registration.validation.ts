@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { IRegistration } from './Registration.type';
+import { IRegistration } from './Registration.types';
 
 export const initialValuesRegistration: IRegistration = {
   username: '',

@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { ILogin } from './Login.type';
+import { ILogin } from './Login.types';
 
 export const initialValuesLogin: ILogin = {
   email: '',
