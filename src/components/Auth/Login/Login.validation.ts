@@ -1,9 +1,5 @@
 import * as Yup from 'yup';
-
-interface ILogin {
-  email: string;
-  password: string;
-}
+import { ILogin } from './Login.type';
 
 export const initialValuesLogin: ILogin = {
   email: '',

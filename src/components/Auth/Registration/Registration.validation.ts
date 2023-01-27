@@ -1,13 +1,14 @@
 import * as Yup from 'yup';
+import { IRegistration } from './Registration.type';
 
-interface IRegistration {
-  username: string,
-  age: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-  confirmEmail: string,
-}
+export const initialValuesRegistration: IRegistration = {
+  username: '',
+  age: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  confirmEmail: '',
+};
 
 export const registrationSchema = Yup.object().shape({
   username: Yup.string()
@@ -35,12 +36,3 @@ export const registrationSchema = Yup.object().shape({
     .required('validation.confirm')
     .oneOf([Yup.ref('password')], 'validation.match'),
 });
-
-export const initialValuesRegistration: IRegistration = {
-  username: '',
-  age: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  confirmEmail: '',
-};

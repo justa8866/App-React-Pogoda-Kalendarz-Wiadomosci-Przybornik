@@ -4,38 +4,11 @@ import { TextFieldProps } from '@mui/material';
 import { useField } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Input from '../../../common/Input/Input';
+import validationSpecialRules from './validation.const';
 
 interface INameProp {
   name: string;
 }
-
-interface IValidationSpecialRules {
-  name: string;
-  min: number;
-  max: number;
-  countable: string;
-}
-
-const validationSpecialRules: IValidationSpecialRules[] = [
-  {
-    name: 'age',
-    min: 3,
-    max: 130,
-    countable: 'years',
-  },
-  {
-    name: 'password',
-    min: 8,
-    max: 30,
-    countable: 'characters',
-  },
-  {
-    name: 'username',
-    min: 3,
-    max: 0,
-    countable: 'characters',
-  },
-];
 
 const FormikTextField = ({ name, ...props }: TextFieldProps & INameProp) => {
   const [field, meta] = useField(name);
@@ -53,10 +26,10 @@ const FormikTextField = ({ name, ...props }: TextFieldProps & INameProp) => {
       helperText={
         meta.error
           ? t(`${meta.error}`, {
-            field: name,
+            field: props?.label,
             min: validationSpecialRule?.min,
             max: validationSpecialRule?.max,
-            countable: validationSpecialRule?.countable,
+            countable: t(`${validationSpecialRule?.countable}`),
           })
           : ''
       }
