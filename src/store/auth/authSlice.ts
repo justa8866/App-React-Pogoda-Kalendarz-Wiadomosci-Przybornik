@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from '../../types/user/IUser.type';
+import { IUser } from '../../types/user/IUser.types';
 import type { RootState } from '../store';
 
 const initialState: IUser = {
