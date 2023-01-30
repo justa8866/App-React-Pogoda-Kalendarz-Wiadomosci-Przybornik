@@ -8,7 +8,7 @@ const initialState: IUser = {
   isLoggedIn: false,
   username: '',
   token: '',
-  role: '',
+  role: 'user',
   authenticationError: '',
 };
 
@@ -17,8 +17,11 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     logout: () => initialState,
-    signin: (state) => {
+    signin: (state, reducer) => {
+      const { user } = reducer.payload;
       state.isLoggedIn = true;
+      state.username = user.email;
+      state.token = user.accessToken;
     },
   },
 });

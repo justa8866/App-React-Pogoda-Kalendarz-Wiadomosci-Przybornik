@@ -23,7 +23,7 @@ export const registrationSchema = Yup.object().shape({
     .required('validation.required'),
   confirmEmail: Yup.string()
     .required('validation.confirm')
-    .oneOf([Yup.ref('password')], 'validation.match'),
+    .oneOf([Yup.ref('email')], 'validation.match'),
   password: Yup.string()
     .min(8, 'validation.tooShort')
     .max(30, 'validation.tooLong')
